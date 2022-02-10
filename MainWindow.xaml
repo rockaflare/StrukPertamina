@@ -5,8 +5,72 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StrukPertamina"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Struk App" Height="550" Width="500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
 
+        <ComboBox Grid.Column="0" Grid.Row="0" x:Name="PrinterSelect" Height="25" Width="120"/>
+        <Button Grid.Column="1" Grid.Row="0" x:Name="Bold" Height="25" Width="25" Content="B" HorizontalAlignment="Left"/>
+        <Button Grid.Column="1" Grid.Row="0" x:Name="Print" Height="25" Width="90" Content="Print" HorizontalAlignment="Left" Margin="40 0 0 0"/>
+        
+        <!--#region Labels-->
+        
+        <Label Grid.Column="0" Grid.Row="2" Content="Nama :" VerticalAlignment="Center"/>
+        <Label Grid.Column="0" Grid.Row="3" Content="Alamat :" VerticalAlignment="Center"/>
+        
+        <Label Grid.Column="0" Grid.Row="4" Content="Starting Receipt No :" VerticalAlignment="Center"/>
+        <Label Grid.Column="0" Grid.Row="5" Content="Receipt Gen (Default 7) :" VerticalAlignment="Center"/>
+        <Label Grid.Column="0" Grid.Row="6" Content="Hose No :" VerticalAlignment="Center"/>
+        <Label Grid.Column="0" Grid.Row="7" Content="Product :" VerticalAlignment="Center"/>
+
+        <Label Grid.Column="0" Grid.Row="8" Content="Jam :" VerticalAlignment="Center"/>
+        <Label Grid.Column="0" Grid.Row="9" Content="Tanggal :" VerticalAlignment="Center"/>
+        <Label Grid.Column="0" Grid.Row="10" Content="Harga :" VerticalAlignment="Center"/>
+        <Label Grid.Column="0" Grid.Row="11" Content="Volume :" VerticalAlignment="Center"/>
+        <Label Grid.Column="0" Grid.Row="12" Content="Total :" VerticalAlignment="Center"/>
+
+        <Label Grid.Column="0" Grid.Row="13" Content="Kabupaten :" VerticalAlignment="Center"/>
+        <Label Grid.Column="0" Grid.Row="14" Content="Footer :" VerticalAlignment="Center"/>
+        <!--#endregion-->
+        
+        <!--#region Controls-->
+        <TextBox Grid.Column="1" Grid.Row="2" Height="25" x:Name="Nama" TextChanged="Nama_TextChanged"/>
+        <TextBox Grid.Column="1" Grid.Row="3" Height="25" x:Name="Alamat"/>
+
+        <TextBox Grid.Column="1" Grid.Row="4" Height="25" x:Name="RecNo"/>
+        <ComboBox Grid.Column="1" Grid.Row="5" Height="25" x:Name="RecGen"/>
+        <TextBox Grid.Column="1" Grid.Row="6" Height="25" x:Name="HoseNo"/>
+        <TextBox Grid.Column="1" Grid.Row="7" Height="25" x:Name="Products"/>
+
+        <ComboBox Grid.Column="1" Grid.Row="8" Height="25" x:Name="Jam"/>
+        <DatePicker Grid.Column="1" Grid.Row="9" Height="25" x:Name="Tanggal"/>
+        <TextBox Grid.Column="1" Grid.Row="10" Height="25" x:Name="Harga"/>
+        <TextBox Grid.Column="1" Grid.Row="11" Height="25" x:Name="Volume"/>
+        <TextBox Grid.Column="1" Grid.Row="12" Height="25" x:Name="Total"/>
+
+        <TextBox Grid.Column="1" Grid.Row="13" Height="25" x:Name="Prov"/>
+        <TextBox Grid.Column="1" Grid.Row="14" Height="25" x:Name="Footer"/>
+        <!--#endregion-->
     </Grid>
 </Window>
