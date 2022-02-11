@@ -4,6 +4,7 @@ using System.Windows;
 using System.Drawing.Printing;
 using System;
 using System.Printing;
+using System.Text.RegularExpressions;
 
 namespace StrukPertamina
 {
@@ -17,9 +18,7 @@ namespace StrukPertamina
             InitializeComponent();
             GetPrinterList();
             DisplayStrukConfig();
-        }
-
-        
+        }        
 
         private void GetPrinterList()
         {
@@ -68,10 +67,68 @@ namespace StrukPertamina
                 MessageBox.Show("Error menyimpan data");
             }
         }
-
+        #region Events
         private void Nama_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
             SaveStrukConfig("Nama", Nama.Text);
+        }
+        private void Alamat_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            SaveStrukConfig("Alamat", Alamat.Text);
+        }
+        private void RecNo_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            SaveStrukConfig("RecNo", RecNo.Text);
+        }
+        private void RecGen_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
+        }
+        private void HoseNo_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            SaveStrukConfig("Hose", HoseNo.Text);
+        }
+        private void Products_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            SaveStrukConfig("Produk", Products.Text);
+        }
+        private void Jam_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
+        }
+        private void Harga_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            SaveStrukConfig("Harga", Harga.Text);
+            Total.Text = Int32.TryParse(Harga.Text, out int n) ? Convert.ToString(Int32.Parse(Volume.Text) * Int32.Parse(Harga.Text)) : "";
+        }
+        private void Volume_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            Total.Text = Convert.ToString(Int32.Parse(Volume.Text) * Int32.Parse(Harga.Text));
+        }
+        private void Total_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+
+        }
+        private void Prov_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            SaveStrukConfig("Prov", Prov.Text);
+        }
+        private void Footer_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            SaveStrukConfig("Footer", Footer.Text);
+        }
+        #endregion
+
+        private void Harga_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void Volume_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

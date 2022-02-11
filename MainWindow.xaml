@@ -56,21 +56,21 @@
         
         <!--#region Controls-->
         <TextBox Grid.Column="1" Grid.Row="2" Height="25" x:Name="Nama" TextChanged="Nama_TextChanged"/>
-        <TextBox Grid.Column="1" Grid.Row="3" Height="25" x:Name="Alamat"/>
+        <TextBox Grid.Column="1" Grid.Row="3" Height="25" x:Name="Alamat" TextChanged="Alamat_TextChanged"/>
 
-        <TextBox Grid.Column="1" Grid.Row="4" Height="25" x:Name="RecNo"/>
-        <ComboBox Grid.Column="1" Grid.Row="5" Height="25" x:Name="RecGen"/>
-        <TextBox Grid.Column="1" Grid.Row="6" Height="25" x:Name="HoseNo"/>
-        <TextBox Grid.Column="1" Grid.Row="7" Height="25" x:Name="Products"/>
+        <TextBox Grid.Column="1" Grid.Row="4" Height="25" x:Name="RecNo" TextChanged="RecNo_TextChanged"/>
+        <ComboBox Grid.Column="1" Grid.Row="5" Height="25" x:Name="RecGen" SelectionChanged="RecGen_SelectionChanged"/>
+        <TextBox Grid.Column="1" Grid.Row="6" Height="25" x:Name="HoseNo" TextChanged="HoseNo_TextChanged"/>
+        <TextBox Grid.Column="1" Grid.Row="7" Height="25" x:Name="Products" TextChanged="Products_TextChanged"/>
 
-        <ComboBox Grid.Column="1" Grid.Row="8" Height="25" x:Name="Jam"/>
+        <ComboBox Grid.Column="1" Grid.Row="8" Height="25" x:Name="Jam" SelectionChanged="Jam_SelectionChanged"/>
         <DatePicker Grid.Column="1" Grid.Row="9" Height="25" x:Name="Tanggal"/>
-        <TextBox Grid.Column="1" Grid.Row="10" Height="25" x:Name="Harga"/>
-        <TextBox Grid.Column="1" Grid.Row="11" Height="25" x:Name="Volume"/>
-        <TextBox Grid.Column="1" Grid.Row="12" Height="25" x:Name="Total"/>
+        <TextBox Grid.Column="1" Grid.Row="10" Height="25" x:Name="Harga" TextChanged="Harga_TextChanged" PreviewTextInput="Harga_PreviewTextInput"/>
+        <TextBox Grid.Column="1" Grid.Row="11" Height="25" x:Name="Volume" TextChanged="Volume_TextChanged" PreviewTextInput="Volume_PreviewTextInput"/>
+        <TextBox Grid.Column="1" Grid.Row="12" Height="25" x:Name="Total" TextChanged="Total_TextChanged" IsEnabled="False"/>
 
-        <TextBox Grid.Column="1" Grid.Row="13" Height="25" x:Name="Prov"/>
-        <TextBox Grid.Column="1" Grid.Row="14" Height="25" x:Name="Footer"/>
+        <TextBox Grid.Column="1" Grid.Row="13" Height="25" x:Name="Prov" TextChanged="Prov_TextChanged"/>
+        <TextBox Grid.Column="1" Grid.Row="14" Height="25" x:Name="Footer" TextChanged="Footer_TextChanged"/>
         <!--#endregion-->
     </Grid>
 </Window>
