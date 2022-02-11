@@ -82,7 +82,20 @@ namespace StrukPertamina
         }
         private void RecGen_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-
+            StrukService strukService = new StrukService();
+            int recGen = 7;
+            if (!String.IsNullOrWhiteSpace(RecNo.Text))
+            {
+                if (RecGen.SelectedIndex > -1)
+                {
+                    recGen = Int32.Parse(RecGen.SelectedItem.ToString());
+                    RecNo.Text = strukService.GenerateReceiptNumber(RecNo.Text, recGen);
+                }
+                else
+                {
+                    RecNo.Text = strukService.GenerateReceiptNumber(RecNo.Text, recGen);
+                }
+            }
         }
         private void HoseNo_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
@@ -99,11 +112,11 @@ namespace StrukPertamina
         private void Harga_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
             SaveStrukConfig("Harga", Harga.Text);
-            Total.Text = Int32.TryParse(Harga.Text, out int n) ? Convert.ToString(Int32.Parse(Volume.Text) * Int32.Parse(Harga.Text)) : "";
+            CalculateTotal();
         }
         private void Volume_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            Total.Text = Convert.ToString(Int32.Parse(Volume.Text) * Int32.Parse(Harga.Text));
+            CalculateTotal();
         }
         private void Total_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
@@ -129,6 +142,17 @@ namespace StrukPertamina
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void CalculateTotal()
+        {
+            if (!String.IsNullOrEmpty(Harga.Text) && !String.IsNullOrEmpty(Volume.Text))
+            {
+                int harga = Int32.Parse(Harga.Text);
+                int volume = Int32.Parse(Volume.Text);
+                string total = Convert.ToString(harga * volume);
+                Total.Text = total;
+            }
         }
     }
 }
