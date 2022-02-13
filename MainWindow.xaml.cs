@@ -18,7 +18,11 @@ namespace StrukPertamina
             InitializeComponent();
             GetPrinterList();
             DisplayStrukConfig();
-        }        
+        }
+
+        string printerName = "";
+        StrukModel strukModel = new StrukModel();
+         
 
         private void GetPrinterList()
         {
@@ -38,7 +42,7 @@ namespace StrukPertamina
             Alamat.Text = ConfigurationManager.AppSettings.Get("Alamat");
             RecNo.Text = ConfigurationManager.AppSettings.Get("RecNo");
             HoseNo.Text = ConfigurationManager.AppSettings.Get("Hose");
-            Products.Text = ConfigurationManager.AppSettings.Get("DEXLITE");
+            Products.Text = ConfigurationManager.AppSettings.Get("Produk");
             Harga.Text = ConfigurationManager.AppSettings.Get("Harga");
             Prov.Text = ConfigurationManager.AppSettings.Get("Prov");
             Footer.Text = ConfigurationManager.AppSettings.Get("Footer");
@@ -88,7 +92,7 @@ namespace StrukPertamina
             {
                 if (RecGen.SelectedIndex > -1)
                 {
-                    recGen = Int32.Parse(RecGen.SelectedItem.ToString());
+                    recGen = Int32.Parse(RecGen.Text);
                     RecNo.Text = strukService.GenerateReceiptNumber(RecNo.Text, recGen);
                 }
                 else
@@ -153,6 +157,47 @@ namespace StrukPertamina
                 string total = Convert.ToString(harga * volume);
                 Total.Text = total;
             }
+        }
+
+        private void Print_Click(object sender, RoutedEventArgs e)
+        {
+            if (PrinterSelect.SelectedIndex != 0)
+            {
+                try
+                {
+                    StrukService printService = new StrukService();
+                    strukModel.Nama = Nama.Text;
+                    strukModel.Alamat = Alamat.Text;
+                    strukModel.ReceiptNo = String.Format("Receipt No:{0}", RecNo.Text);
+                    strukModel.Hose = String.Format("Hose No:{0}", HoseNo.Text);
+                    strukModel.Produk = String.Format("Product:{0}", Products.Text);
+                    strukModel.Jam = String.Format("Time: {0}", printService.GenerateTimeString(Jam.Text));
+                    strukModel.Tanggal = String.Format("Date:  {0}", Tanggal.Text);
+                    strukModel.Harga = String.Format("Price:          {0}", Harga.Text);
+                    strukModel.Volume = String.Format("Volume:         {0}", Volume.Text);
+                    strukModel.TotalSale = String.Format("Total Sale:     {0}", Total.Text);
+                    strukModel.Prov = Prov.Text;
+                    strukModel.Footer = Footer.Text;
+                    printService.PrintStruk(printerName, strukModel);
+
+                    RecNo.Text = printService.GenerateReceiptNumber(RecNo.Text, Int32.Parse(RecGen.Text));
+                    Tanggal.SelectedDate = Tanggal.SelectedDate.Value.AddDays(1);
+                    
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Printer belum dipilih!");
+            }
+        }
+
+        private void PrinterSelect_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            printerName = PrinterSelect.SelectedValue.ToString();
         }
     }
 }

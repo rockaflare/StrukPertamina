@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ESC_POS_USB_NET.Enums;
+using ESC_POS_USB_NET.Printer;
 
 namespace StrukPertamina
 {
@@ -25,6 +27,42 @@ namespace StrukPertamina
             string newReceiptNum = Convert.ToString(receipt).PadLeft(12, '0');
 
             return newReceiptNum;
+        }
+
+        public void PrintStruk(string printerName, StrukModel strukModel)
+        {
+            Printer printer = new Printer(printerName);
+            EncodingProvider ppp = CodePagesEncodingProvider.Instance;
+            Encoding.RegisterProvider(ppp);
+            printer.NewLines(3);
+            printer.SetLineHeight(24);
+            printer.Append(strukModel.Nama);
+            printer.Append(strukModel.Alamat);
+            printer.NewLine();
+            printer.Append(strukModel.ReceiptNo);
+            printer.Append(strukModel.Hose);
+            printer.Append(strukModel.Produk);
+            printer.NewLine();
+            printer.Append(strukModel.Jam);
+            printer.Append(strukModel.Tanggal);
+            printer.Append(strukModel.Harga);
+            printer.Append(strukModel.Volume);
+            printer.Append(strukModel.TotalSale);
+            printer.NewLine();
+            printer.Append(strukModel.Prov);
+            printer.Append(strukModel.Footer);
+            printer.SetLineHeight(40);
+            printer.NewLines(4);
+            printer.PrintDocument();
+        }
+
+        public void PrintDemo(string printerName)
+        {
+            Printer printer = new Printer(printerName);
+            EncodingProvider ppp = CodePagesEncodingProvider.Instance;
+            Encoding.RegisterProvider(ppp);
+            printer.TestPrinter();
+            printer.PrintDocument();
         }
     }
 }

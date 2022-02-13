@@ -30,10 +30,11 @@
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
 
-        <ComboBox Grid.Column="0" Grid.Row="0" x:Name="PrinterSelect" Height="25" Width="120"/>
+        <ComboBox Grid.Column="0" Grid.Row="0" x:Name="PrinterSelect" Height="25" Width="120" SelectionChanged="PrinterSelect_SelectionChanged"/>
         <Button Grid.Column="1" Grid.Row="0" x:Name="Bold" Height="25" Width="25" Content="B" HorizontalAlignment="Left"/>
-        <Button Grid.Column="1" Grid.Row="0" x:Name="Print" Height="25" Width="90" Content="Print" HorizontalAlignment="Left" Margin="40 0 0 0"/>
-        
+        <Button Grid.Column="1" Grid.Row="0" x:Name="Print" Height="25" Width="90" Content="Print" HorizontalAlignment="Left" Margin="40 0 0 0" Click="Print_Click"/>
+        <Label Grid.Column="1" Grid.Row="0" Name="PrinterStat" Content="Printer Status : Offline" Margin="135 0 0 0" VerticalAlignment="Center"/>
+
         <!--#region Labels-->
         
         <Label Grid.Column="0" Grid.Row="2" Content="Nama :" VerticalAlignment="Center"/>
@@ -59,7 +60,7 @@
         <TextBox Grid.Column="1" Grid.Row="3" Height="25" x:Name="Alamat" TextChanged="Alamat_TextChanged"/>
 
         <TextBox Grid.Column="1" Grid.Row="4" Height="25" x:Name="RecNo" TextChanged="RecNo_TextChanged"/>
-        <ComboBox Grid.Column="1" Grid.Row="5" Height="25" x:Name="RecGen" SelectedItem="7" SelectionChanged="RecGen_SelectionChanged">
+        <ComboBox Grid.Column="1" Grid.Row="5" Height="25" x:Name="RecGen" SelectedIndex="1" SelectionChanged="RecGen_SelectionChanged">
             <ComboBoxItem>5</ComboBoxItem>
             <ComboBoxItem>7</ComboBoxItem>
             <ComboBoxItem>9</ComboBoxItem>
