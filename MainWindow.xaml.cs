@@ -21,6 +21,7 @@ namespace StrukPertamina
         }
 
         string printerName = "";
+        string jamtext = "";
         StrukModel strukModel = new StrukModel();
          
 
@@ -111,7 +112,17 @@ namespace StrukPertamina
         }
         private void Jam_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-
+            if (Jam.SelectedValue.ToString() == "Manual")
+            {
+                JamManual.IsEnabled = true;
+            }
+            else
+            {
+                JamManual.Text = "";
+                JamManual.IsEnabled = false;
+                StrukService printService = new StrukService();
+                jamtext = printService.GenerateTimeString(Jam.SelectedValue.ToString());
+            }
         }
         private void Harga_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
@@ -171,7 +182,7 @@ namespace StrukPertamina
                     strukModel.ReceiptNo = String.Format("Receipt No:{0}", RecNo.Text);
                     strukModel.Hose = String.Format("Hose No:{0}", HoseNo.Text);
                     strukModel.Produk = String.Format("Product:{0}", Products.Text);
-                    strukModel.Jam = String.Format("Time: {0}", printService.GenerateTimeString(Jam.Text));
+                    strukModel.Jam = String.Format("Time: {0}", jamtext);
                     strukModel.Tanggal = String.Format("Date:  {0}", Tanggal.Text);
                     strukModel.Harga = String.Format("Price:          {0}", Harga.Text);
                     strukModel.Volume = String.Format("Volume:         {0}", Volume.Text);
@@ -198,6 +209,11 @@ namespace StrukPertamina
         private void PrinterSelect_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             printerName = PrinterSelect.SelectedValue.ToString();
+        }
+
+        private void JamManual_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            jamtext = JamManual.Text;
         }
     }
 }

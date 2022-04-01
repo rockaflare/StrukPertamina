@@ -71,32 +71,38 @@
         <TextBox Grid.Column="1" Grid.Row="6" Height="25" x:Name="HoseNo" TextChanged="HoseNo_TextChanged"/>
         <TextBox Grid.Column="1" Grid.Row="7" Height="25" x:Name="Products" TextChanged="Products_TextChanged"/>
 
-        <ComboBox Grid.Column="1" Grid.Row="8" Height="25" x:Name="Jam" SelectionChanged="Jam_SelectionChanged">
-            <ComboBoxItem>1</ComboBoxItem>
-            <ComboBoxItem>2</ComboBoxItem>
-            <ComboBoxItem>3</ComboBoxItem>
-            <ComboBoxItem>4</ComboBoxItem>
-            <ComboBoxItem>5</ComboBoxItem>
-            <ComboBoxItem>6</ComboBoxItem>
-            <ComboBoxItem>7</ComboBoxItem>
-            <ComboBoxItem>8</ComboBoxItem>
-            <ComboBoxItem>9</ComboBoxItem>
-            <ComboBoxItem>10</ComboBoxItem>
-            <ComboBoxItem>11</ComboBoxItem>
-            <ComboBoxItem>12</ComboBoxItem>
-            <ComboBoxItem>13</ComboBoxItem>
-            <ComboBoxItem>14</ComboBoxItem>
-            <ComboBoxItem>15</ComboBoxItem>
-            <ComboBoxItem>16</ComboBoxItem>
-            <ComboBoxItem>17</ComboBoxItem>
-            <ComboBoxItem>18</ComboBoxItem>
-            <ComboBoxItem>19</ComboBoxItem>
-            <ComboBoxItem>20</ComboBoxItem>
-            <ComboBoxItem>21</ComboBoxItem>
-            <ComboBoxItem>22</ComboBoxItem>
-            <ComboBoxItem>23</ComboBoxItem>
-            <ComboBoxItem>24</ComboBoxItem>
-        </ComboBox>
+        <StackPanel  Grid.Column="1" Grid.Row="8" Orientation="Horizontal">
+            <ComboBox Height="25" Width="50" x:Name="Jam" SelectedValuePath="Content" SelectionChanged="Jam_SelectionChanged">
+                <ComboBoxItem>1</ComboBoxItem>
+                <ComboBoxItem>2</ComboBoxItem>
+                <ComboBoxItem>3</ComboBoxItem>
+                <ComboBoxItem>4</ComboBoxItem>
+                <ComboBoxItem>5</ComboBoxItem>
+                <ComboBoxItem>6</ComboBoxItem>
+                <ComboBoxItem>7</ComboBoxItem>
+                <ComboBoxItem>8</ComboBoxItem>
+                <ComboBoxItem>9</ComboBoxItem>
+                <ComboBoxItem>10</ComboBoxItem>
+                <ComboBoxItem>11</ComboBoxItem>
+                <ComboBoxItem>12</ComboBoxItem>
+                <ComboBoxItem>13</ComboBoxItem>
+                <ComboBoxItem>14</ComboBoxItem>
+                <ComboBoxItem>15</ComboBoxItem>
+                <ComboBoxItem>16</ComboBoxItem>
+                <ComboBoxItem>17</ComboBoxItem>
+                <ComboBoxItem>18</ComboBoxItem>
+                <ComboBoxItem>19</ComboBoxItem>
+                <ComboBoxItem>20</ComboBoxItem>
+                <ComboBoxItem>21</ComboBoxItem>
+                <ComboBoxItem>22</ComboBoxItem>
+                <ComboBoxItem>23</ComboBoxItem>
+                <ComboBoxItem>24</ComboBoxItem>
+                <ComboBoxItem>Manual</ComboBoxItem>
+            </ComboBox>
+            <TextBox Height="25" Width="100" Margin="10 0 0 0" IsEnabled="False" x:Name="JamManual" TextChanged="JamManual_TextChanged"/>
+        </StackPanel>
+
+        
         <DatePicker Grid.Column="1" Grid.Row="9" Height="25" x:Name="Tanggal"/>
         <TextBox Grid.Column="1" Grid.Row="10" Height="25" x:Name="Harga" TextChanged="Harga_TextChanged" PreviewTextInput="Harga_PreviewTextInput"/>
         <TextBox Grid.Column="1" Grid.Row="11" Height="25" x:Name="Volume" TextChanged="Volume_TextChanged" PreviewTextInput="Volume_PreviewTextInput"/>
