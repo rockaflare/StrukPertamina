@@ -49,6 +49,21 @@ namespace StrukPertamina
             Footer.Text = ConfigurationManager.AppSettings.Get("Footer");
         }
 
+        private void JamGenerateChange()
+        {
+            if (Jam.SelectedValue.ToString() == "Manual")
+            {
+                JamManual.IsEnabled = true;
+            }
+            else
+            {
+                JamManual.Text = "";
+                JamManual.IsEnabled = false;
+                StrukService printService = new StrukService();
+                jamtext = printService.GenerateTimeString(Jam.SelectedValue.ToString());
+            }
+        }
+
         private void SaveStrukConfig(string key, string value)
         {
             try
@@ -85,23 +100,23 @@ namespace StrukPertamina
         {
             SaveStrukConfig("RecNo", RecNo.Text);
         }
-        private void RecGen_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-            StrukService strukService = new StrukService();
-            int recGen = 7;
-            if (!String.IsNullOrWhiteSpace(RecNo.Text))
-            {
-                if (RecGen.SelectedIndex > -1)
-                {
-                    recGen = Int32.Parse(RecGen.Text);
-                    RecNo.Text = strukService.GenerateReceiptNumber(RecNo.Text, recGen);
-                }
-                else
-                {
-                    RecNo.Text = strukService.GenerateReceiptNumber(RecNo.Text, recGen);
-                }
-            }
-        }
+        //private void RecGen_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        //{
+        //    StrukService strukService = new StrukService();
+        //    int recGen = 7;
+        //    if (!String.IsNullOrWhiteSpace(RecNo.Text))
+        //    {
+        //        if (RecGen.SelectedIndex > -1)
+        //        {
+        //            recGen = Int32.Parse(RecGen.Text);
+        //            RecNo.Text = strukService.GenerateReceiptNumber(RecNo.Text, recGen);
+        //        }
+        //        else
+        //        {
+        //            RecNo.Text = strukService.GenerateReceiptNumber(RecNo.Text, recGen);
+        //        }
+        //    }
+        //}
         private void HoseNo_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
             SaveStrukConfig("Hose", HoseNo.Text);
@@ -112,17 +127,7 @@ namespace StrukPertamina
         }
         private void Jam_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            if (Jam.SelectedValue.ToString() == "Manual")
-            {
-                JamManual.IsEnabled = true;
-            }
-            else
-            {
-                JamManual.Text = "";
-                JamManual.IsEnabled = false;
-                StrukService printService = new StrukService();
-                jamtext = printService.GenerateTimeString(Jam.SelectedValue.ToString());
-            }
+            JamGenerateChange();
         }
         private void Harga_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
@@ -191,7 +196,8 @@ namespace StrukPertamina
                     strukModel.Footer = Footer.Text;
                     printService.PrintStruk(printerName, strukModel);
 
-                    RecNo.Text = printService.GenerateReceiptNumber(RecNo.Text, Int32.Parse(RecGen.Text));
+                    RecNo.Text = printService.GenerateReceiptNumber(RecNo.Text, MultiplierStart.Text, MultiplierEnd.Text);
+                    JamGenerateChange();
                     Tanggal.SelectedDate = Tanggal.SelectedDate.Value.AddDays(1);
                     
                 }
@@ -214,6 +220,14 @@ namespace StrukPertamina
         private void JamManual_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
             jamtext = JamManual.Text;
+        }
+
+        private void Skip_Click(object sender, RoutedEventArgs e)
+        {
+            StrukService printService = new StrukService();
+            RecNo.Text = printService.GenerateReceiptNumber(RecNo.Text, MultiplierStart.Text, MultiplierEnd.Text);
+            JamGenerateChange();
+            Tanggal.SelectedDate = Tanggal.SelectedDate.Value.AddDays(1);
         }
     }
 }

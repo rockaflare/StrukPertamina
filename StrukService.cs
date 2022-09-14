@@ -21,9 +21,15 @@ namespace StrukPertamina
             return timeString;
         }
 
-        public string GenerateReceiptNumber(string recDefault, int multiplier)
+        public string GenerateReceiptNumber(string recDefault, string multiplierstart, string multiplierend)
         {
-            int receipt = Int32.Parse(recDefault) + multiplier;
+            Random random = new Random();
+            int multiplier = 14;
+            if (!string.IsNullOrWhiteSpace(multiplierstart) && !string.IsNullOrWhiteSpace(multiplierend))
+            {
+                multiplier = random.Next(Int32.Parse(multiplierstart), Int32.Parse(multiplierend));
+            }
+            long receipt = Int64.Parse(recDefault) + multiplier;
             string newReceiptNum = Convert.ToString(receipt).PadLeft(12, '0');
 
             return newReceiptNum;
